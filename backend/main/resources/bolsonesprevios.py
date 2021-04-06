@@ -8,3 +8,7 @@ class BolsonesPrevios(Resource):
             return BolsonesPrevios[int(id)]
 
         return '', 404
+
+class BolsonPrevio(Resource):
+    def get(self):
+        return ""

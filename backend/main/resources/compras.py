@@ -10,14 +10,15 @@ class Compras(Resource):
             return Compras[int(id)]
 
         return '', 404
+    def post(self):
+        return ''
+
 class Compra(Resource):
-
     def get(self, id):
-
         if int(id) in Compra:
-
             return Compra[int(id)]
-
         return '', 404
-
-        
+    def delete(self):
+        return''
+    def put(self):
+        return''

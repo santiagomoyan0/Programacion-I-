@@ -22,3 +22,7 @@ class BolsonPendiente(Resource):
             return BolsonPendiente[int(id)]
 
         return '', 404
+    def delete(self):
+        return''
+    def put(self):
+        return''
