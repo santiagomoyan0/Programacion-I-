@@ -1,1 +1,9 @@
-from assa 
+from .bolsones import Bolsones as BolsonesResource
+from .bolsones import Bolson as BolsonResource
+from .bolsonesenventa import Bolsonesenventa as BolsonesenventaResource
+from .bolsonesenventa import Bolsonenventa as BolsonenventaResource
+from .Bolsonespendientes import Bolsonespendientes as BolsonesPendiestesResource
+from .Bolsonpendientes import Bolsonpendiente as BolsonPendienteResource
+from .Bolsonesprevios import Bolsonesprevios as BolsonesPreviosResource
+from .productos import Productos as ProductosResource
+from .productos import producto as ProductoResource
