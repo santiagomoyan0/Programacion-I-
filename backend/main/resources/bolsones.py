@@ -2,15 +2,16 @@ from flask_restful import Resource
 from flask import request
 
 BOLSONES = {
-    1: {'nombre': 'frutalmix', 'identificador': '001'}
-    2: {'nombre': 'chacra soria', 'identificador': '002'}
-    3: {'nombre': 'la esperanza', 'identificador': '003'}
+    1: {'nombre': 'frutalmix'},
+    2: {'nombre': 'chacra soria'},
+    3: {'nombre': 'la esperanza'}
+
 }
 class Bolsones(Resource):
     def get(self):
         return BOLSONES
 
-             
+
 class Bolson(Resource):
     def get(self, id):
         if int(id) in BOLSONES:
