@@ -11,10 +11,8 @@ BOLSONESPREVIOS = {
 
 
 class BolsonesPrevios(Resource):
-    def get(self, id):
-        if int(id) in BOLSONESPREVIOS:
-            return BOLSONESPREVIOS[int(id)]
-        return '', 404
+    def get(self):
+        return BOLSONESPREVIOS
 
 class BolsonPrevios(Resource):
     def get(self, id):

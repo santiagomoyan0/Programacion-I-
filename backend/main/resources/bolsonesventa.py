@@ -15,5 +15,5 @@ class BolsonesVenta(Resource):
 class BolsonVenta(Resource):
     def get(self,id):
         if int(id) in BOLSONESVENTA:
-            return BOLSONEVENTA[int(id)]
+            return BOLSONESVENTA[int(id)]
         return '', 404

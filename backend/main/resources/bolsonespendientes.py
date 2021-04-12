@@ -29,7 +29,7 @@ class BolsonPendiente(Resource):
         return '', 404
     def put(self, id):
         if int(id) in BOLSONESPENDIENTES:
-            professor = BOLSONESPENDIENTES[int(id)]
+            bolsonpendiente = BOLSONESPENDIENTES[int(id)]
             data = request.get_json()
             bolsonpendiente.update(data)
             return bolsonpendiente, 201

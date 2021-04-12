@@ -12,7 +12,7 @@ PROVEEDORES = {
 }
 
 class Proveedores(Resource):
-    def get(self, id):
+    def get(self):
         return PROVEEDORES
     def post(self):
         proveedor = request.get_json()
@@ -25,15 +25,15 @@ class Proveedor(Resource):
         if int(id) in PROVEEDORES:
             return PROVEEDORES[int(id)]
         return '', 404
-    def delete(self):
+    def delete(self, id):
         if int(id) in PROVEEDORES:
             del PROVEEDORES[int(id)]
             return '', 204
         return '', 404
-    def put(self):
+    def put(self, id):
         if int(id) in PROVEEDORES:
             proveedor = PROVEEDORES[int(id)]
-            info = request.get_json()
-            proveedor.update(info)
+            data = request.get_json()
+            proveedor.update(data)
             return proveedor, 201
         return '', 404
