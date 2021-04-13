@@ -4,7 +4,7 @@ class Cliente(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable = False)
     apellido = db.Column(db.String(100), nullable = False)
-    telefono = db.Column(db.Strig(100), nullable = False)
+    telefono = db.Column(db.String(100), nullable = False)
     mail = db.Column(db.String(100), nullable = False)
 
     def _repr_(self):
@@ -29,6 +29,6 @@ class Cliente(db.Model):
         return Cliente(id=id,
                     nombre=nombre,
                     apellido=apellido,
-                    telefono=telefono,s
+                    telefono=telefono,
                     mail=mail
                     )

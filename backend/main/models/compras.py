@@ -29,6 +29,6 @@ class Compra(db.Model):
         return Compra(id=id,
                     clienteid=clienteid,
                     bolsonid=bolsonid,
-                    fechacompra=fechacompra
+                    fechacompra=fechacompra,
                     retirado=retirado
                     )
