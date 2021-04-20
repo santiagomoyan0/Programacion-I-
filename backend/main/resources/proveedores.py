@@ -5,8 +5,8 @@ from main.models import ProveedorModel
 
 class Proveedores(Resource):
     def get(self):
-        proveedor = db.session.query(ProveedorModel).get_or_404(id)
-        return proveedor.to_json()
+        proveedores = db.session.query(ProveedorModel).all()
+        return jsonify([proveedor.to_json() for proveedor in proveedores])
     def post(self):
         proveedor = ProveedorModel.from_json(request.get_json())
         db.session.add(proveedor)
