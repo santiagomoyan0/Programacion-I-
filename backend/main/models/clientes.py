@@ -8,14 +8,14 @@ class Cliente(db.Model):
     mail = db.Column(db.String(100), nullable = False)
 
     def _repr_(self):
-        return '<Cliente: %r %r >' % (self.nombre, self.apellido, self.telefono, self.mail)
+        return '<Cliente: %r %r %r %r >' % (self.nombre, self.apellido, self.telefono, self.mail)
     def to_json(self):
         cliente_json = {
             'id': self.id,
-            'nombre': self.nombre,
-            'apellido': self.apellido,
-            'telefono': self.telefono,
-            'mail': self.mail
+            'nombre': str(self.nombre),
+            'apellido': str(self.apellido),
+            'telefono': str(self.telefono),
+            'mail': str(self.mail)
         }
         return cliente_json
     @staticmethod

@@ -6,7 +6,7 @@ class Proveedor(db.Model):
     telefono = db.Column(db.String(100), nullable = False)
 
     def _repr_(self):
-        return '<Proveedor: %r %r >' % (self.nombre, self.telefono)
+        return '<Proveedor: %r %r %r >' % (self.nombre, self.telefono)
     def to_json(self):
         proveedor_json = {
             'id': self.id,

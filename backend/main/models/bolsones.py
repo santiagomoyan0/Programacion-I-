@@ -3,10 +3,10 @@ from .. import db
 class Bolson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable = False)
-    aprobado = db.Column(db.Boolean, nullable = False)
+    aprobado = db.Column(db.Boolean, default = False, nullable = False)
     fecha = db.Column(db.DateTime, nullable = False)
     def _repr_(self):
-        return '<Bolson: %r %r >' % (self.nombre, self.aprobado, self.fecha)
+        return '<Bolson: %r %r %r >' % (self.nombre, self.aprobado, self.fecha)
     def to_json(self):
         bolson_json = {
             'id': self.id,

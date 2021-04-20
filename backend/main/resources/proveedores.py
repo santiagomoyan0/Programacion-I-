@@ -1,39 +1,34 @@
 from flask_restful import Resource
-from flask import request
-
-PROVEEDORES = {
-    1: {'nombre': 'frutalmix', 'telefono': '260421121'},
-    2: {'nombre': 'chacra soria', 'telefono': '260475433'},
-    3: {'la esperanza': 'la esperanza', 'telefono': '260432452'},
-    4: {'nombre': 'Carlos Moreno', 'telefono': '260462332'},
-    5: {'nombre': 'Granja el sol', 'telefono': '260432354'},
-    6: {'nombre': 'Estancia la tranquera', 'telefono': '221533224'}
-
-}
+from flask import request, jsonify
+from .. import db
+from main.models import ProveedorModel
 
 class Proveedores(Resource):
     def get(self):
-        return PROVEEDORES
+        proveedor = db.session.query(ProveedorModel).get_or_404(id)
+        return proveedor.to_json()
     def post(self):
-        proveedor = request.get_json()
-        id = int(max(PROVEEDORES.keys())) + 1
-        PROVEEDORES[id] = proveedor
-        return PROVEEDORES[id], 201
+        proveedor = ProveedorModel.from_json(request.get_json())
+        db.session.add(proveedor)
+        db.session.commit()
+        return proveedor.to_json(), 201
 
 class Proveedor(Resource):
     def get(self, id):
-        if int(id) in PROVEEDORES:
-            return PROVEEDORES[int(id)]
-        return '', 404
+        proveedor = db.session.query(ProveedorModel).get_or_404(id)
+        return proveedor.to_json()
+
     def delete(self, id):
-        if int(id) in PROVEEDORES:
-            del PROVEEDORES[int(id)]
-            return '', 204
-        return '', 404
+        proveedor = db.session.query(ProveedorModel).get_or_404(id)
+        db.session.delete(proveedor)
+        db.session.commit()
+        return '', 204
+
     def put(self, id):
-        if int(id) in PROVEEDORES:
-            proveedor = PROVEEDORES[int(id)]
-            data = request.get_json()
-            proveedor.update(data)
-            return proveedor, 201
-        return '', 404
+        proveedor = db.session.query(ProveedorModel).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(proveedor, key, value)
+        db.session.add(proveedor)
+        db.session.commit()
+        return proveedor.to_json(), 201
