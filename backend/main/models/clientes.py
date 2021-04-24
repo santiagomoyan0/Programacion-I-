@@ -6,7 +6,7 @@ class Cliente(db.Model):
     apellido = db.Column(db.String(100), nullable = False)
     telefono = db.Column(db.String(100), nullable = False)
     mail = db.Column(db.String(100), nullable = False)
-
+    compras = db.relationship('Compra', back_populates='cliente', cascade='all, delete-orphan')
     def _repr_(self):
         return '<Cliente: %r %r %r %r >' % (self.nombre, self.apellido, self.telefono, self.mail)
     def to_json(self):
