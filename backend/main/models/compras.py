@@ -1,5 +1,6 @@
 from .. import db
 from datetime import datetime
+from . import ClienteModel, BolsonModel
 class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fechacompra = db.Column(db.DateTime, nullable = False)
@@ -9,7 +10,7 @@ class Compra(db.Model):
     bolson = db.relationship('Bolson', back_populates='compras', uselist=False, single_parent=True)
     cliente= db.relationship('Cliente', back_populates='compras', uselist=False, single_parent=True)
     def _repr_(self):
-        return '<Compra: %r %r %r %r >' % (self.fechacompra, self.retirado, self.bolsonid, self.clienteid)
+        return '<Compra: %r %r %r %r >' % (self.fechacompra, self.retirado, self.cliente.to_json(), self.bolson.to_json())
     def to_json(self):
         compra_json = {
             'id': self.id,

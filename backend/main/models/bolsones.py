@@ -6,6 +6,7 @@ class Bolson(db.Model):
     aprobado = db.Column(db.Boolean, default = False, nullable = False)
     fecha = db.Column(db.DateTime, nullable = False)
     compras = db.relationship('Compra', back_populates='bolson')
+    productosbolsones = db.relationship("ProductoBolson", back_populates="bolson", cascade="all, delete-orphan")
     def _repr_(self):
         return '<Bolson: %r %r %r >' % (self.nombre, self.aprobado, self.fecha)
     def to_json(self):
