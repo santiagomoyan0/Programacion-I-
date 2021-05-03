@@ -11,7 +11,6 @@ class Bolsones(Resource):
         if request.get_json():
             filters = request.get_json().items()
             for key, value in filters:
-                #Paginación
                 if key =="page":
                     page = int(value)
                 if key == "per_page":

@@ -2,22 +2,36 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import BolsonModel
-from datetime import datetime, timedelta
+import datetime as dt
 
 class BolsonesPrevios(Resource):
-    def __init__(self):
-        self.fecha = datetime.today() - timedelta(days=7)
-
-
+    date = dt.datetime.today() - dt.timedelta(days=7)
     def get(self):
-         bolsonesprevios = db.session.query(BolsonModels).filter(BolsonModels.fecha <= self.fecha).all
-         return bolsonesprevios
+        page = 1
+        per_page = 10
 
+        bolsones = db.session.query(BolsonModel).filter(BolsonModel.fecha <= self.date)
 
+        if request.get_json():
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == 'page':
+                    page = int(value)
+                elif key == 'per_page':
+                    per_page = int(value)
+
+        bolsones = bolsones.paginate(page, per_page, True, 30)
+        return jsonify({
+            'bolsonesprevios': [bolson.to_json() for bolson in bolsones.items],
+            'total': bolsones.total,
+            'pages': bolsones.pages,
+            'page': page
+        })
 
 class BolsonPrevios(Resource):
     def get(self, id):
-        bolsonesprevios = db.session.query(BolsonModels).filter(BolsonModels.fecha <= self.fecha).all
-        if int(id) in bolsonesprevios:
-            return bolsonesprevios[int(id)]
-        return "", 404
+         bolsonprevio = db.session.query(BolsonModel).get_or_404(id)
+         if bolsonprevio.fecha <= BolsonesPrevios.date:
+            return jsonify(bolsonprevio.to_json())
+         else:
+            return '', 404

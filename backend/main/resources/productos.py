@@ -15,6 +15,7 @@ class Productos(Resource):
                     page = int(value)
                 if key == "per_page":
                     per_page = int(value)
+        productos = productos.paginate(page, per_page, True, 30)
         return jsonify({ 'productos': [producto.to_json() for producto in productos.items],
                   'total': productos.total,
                   'pages': productos.pages,
