@@ -3,7 +3,7 @@ from .. import db
 class Producto(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable = False)
-    proveedorid = db.Column(db.Integer, db.ForeignKey('proveedor.id'), nullable=False)
+    usuarioid = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     usuario = db.relationship('Usuario', back_populates='productos', uselist=False, single_parent=True)
     productosbolsones = db.relationship("ProductoBolson", back_populates="producto", cascade="all, delete-orphan")
     def _repr_(self):

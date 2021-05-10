@@ -27,6 +27,8 @@ class Clientes(Resource):
     @jwt_required()
     def post(self):
         cliente = UsuarioModel.from_json(request.get_json())
+        current_user = get_jwt_identity()
+        cliente.usuarioid = current_user
         db.session.add(cliente)
         db.session.commit()
         return cliente.to_json(), 201
