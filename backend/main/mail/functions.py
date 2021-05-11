@@ -16,3 +16,9 @@ def sendMail(to, subject, template, **kwargs):
         print(str(e))
         return "Mail deliver failed"
     return True
+
+mail = Blueprint('mail', __name__, url_prefix='/mail')
+
+@mail.promo
+def sendPromo(to, subject, template, **kwargs):
+    msg = Message()
