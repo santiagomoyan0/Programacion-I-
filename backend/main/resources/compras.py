@@ -4,8 +4,11 @@ from .. import db
 from main.models import CompraModel
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decoradores import admin_required
+from main.auth.decoradores import cliente_required
+from main.auth.decoradores import cliente_or_admin_required
 
 class Compras(Resource):
+    @admin_required
     def get(self):
         page = 1
         per_page = 10
@@ -23,7 +26,7 @@ class Compras(Resource):
                   'pages': compras.pages,
                   'page': page
                   })
-
+    @cliente_required
     def post(self):
         compra = CompraModel.from_json(request.get_json())
         db.session.add(compra)
@@ -31,16 +34,17 @@ class Compras(Resource):
         return compra.to_json(), 201
 
 class Compra(Resource):
+    @cliente_or_admin_required
     def get(self, id):
         compra = db.session.query(CompraModel).get_or_404(id)
         return compra.to_json()
-
+    @admin_required
     def delete(self, id):
         compra = db.session.query(CompraModel).get_or_404(id)
         db.session.delete(compra)
         db.session.commit()
         return '', 204
-
+    @admin_required
     def put(self, id):
         compra = db.session.query(CompraModel).get_or_404(id)
         data = request.get_json().items()
