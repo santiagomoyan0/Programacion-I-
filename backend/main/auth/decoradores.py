@@ -18,6 +18,28 @@ def admin_required(fn):
             return 'Only admins can access', 403
     return wrapper
 
+def proveedor_or_admin_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        verify_jwt_in_request()
+        claims = get_jwt()
+        if claims['rol'] == 'proveedor' or claims['role'] == 'admin':
+            return fn(*args, **kwargs)
+        else:
+            return 'Only admins or proveedores can access', 403
+    return wrapper
+
+def proveedor_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        verify_jwt_in_request()
+        claims = get_jwt()
+        if claims['rol'] == 'proveedor':
+            return fn(*args, **kwargs)
+        else:
+            return 'Only proveedores can access', 403
+    return wrapper
+
 @jwt.user_identity_loader
 def user_identity_lookup(usuario):
     #Definir ID como atributo identificatorio

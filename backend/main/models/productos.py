@@ -7,12 +7,12 @@ class Producto(db.Model):
     usuario = db.relationship('Usuario', back_populates='productos', uselist=False, single_parent=True)
     productosbolsones = db.relationship("ProductoBolson", back_populates="producto", cascade="all, delete-orphan")
     def _repr_(self):
-        return '<Producto: %r %r >' % (self.nombre, self.proveedorid)
+        return '<Producto: %r %r >' % (self.nombre, self.usuarioid)
     def to_json(self):
         producto_json = {
             'id': self.id,
             'nombre': str(self.nombre),
-            'proveedor': self.proveedor.nombre
+            'usuario': self.usuario.nombre
 
         }
         return producto_json
@@ -21,8 +21,8 @@ class Producto(db.Model):
     def from_json(producto_json):
         id = producto_json.get('id')
         nombre = producto_json.get('nombre')
-        proveedorid = producto_json.get('proveedorid')
+        usuarioid = producto_json.get('usuarioid')
         return Producto(id=id,
                     nombre=nombre,
-                    proveedorid=proveedorid,
+                    usuarioid=usuarioid,
                     )

@@ -3,9 +3,11 @@ from flask import request, jsonify
 from .. import db
 from main.models import BolsonModel
 import datetime as dt
-
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decoradores import admin_required
 class BolsonesPrevios(Resource):
     date = dt.datetime.today() - dt.timedelta(days=7)
+    @admin_required
     def get(self):
         page = 1
         per_page = 10
@@ -29,6 +31,7 @@ class BolsonesPrevios(Resource):
         })
 
 class BolsonPrevios(Resource):
+    @admin_required
     def get(self, id):
          bolsonprevio = db.session.query(BolsonModel).get_or_404(id)
          if bolsonprevio.fecha <= BolsonesPrevios.date:
