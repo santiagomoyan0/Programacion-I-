@@ -35,6 +35,4 @@ class Bolson(Resource):
 
 
 
-        """if int(id) in BOLSONES:
-            return BOLSONES [int(id)]
-        return '', 404"""
+        
