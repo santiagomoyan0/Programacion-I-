@@ -1,2 +1,5 @@
 flask
- python-dotenv
+python-dotenv
+flask-login
+flask_wtf
+email_validator

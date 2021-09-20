@@ -6,8 +6,10 @@ iniciar_sesion = Blueprint('iniciar_sesion', __name__, url_prefix='/iniciar-sesi
 @iniciar_sesion.route('/')
 def index():
     #Mostrar template
-    return render_template('menu.html' )
+    return render_template('menuventas.html' )
 
 @iniciar_sesion.route('/view/<int:id>')
 def view(id):
     return render_template('iniciar_sesion.html' )
+
+
