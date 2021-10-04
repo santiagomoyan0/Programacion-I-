@@ -15,9 +15,9 @@ def create_app():
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
     csrf.init_app(app)
-    from main.routes import main, iniciar_sesion
+    from main.routes import main, inicio
     app.register_blueprint(routes.main.main)
-    app.register_blueprint(routes.iniciar_sesion.iniciar_sesion)
+    app.register_blueprint(routes.inicio.inicio)
 
     return app
     

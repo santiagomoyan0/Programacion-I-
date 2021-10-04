@@ -1,0 +1,107 @@
+
+ {% extends 'main.html' %}
+{% from 'macros/form_macros.html' import show_field, show_submit %}
+        
+{% block head %}
+{{ super() }}
+        
+{% endblock %}
+        
+{% block content %}
+    
+
+    <div class="container">
+
+				<div class="d-flex justify-content-center bg-primary">
+					<h3>Bolsones en venta</h3>
+				</div>
+        <div class = "row">
+        <div class="col-md-4">
+					<div class="card">
+					  <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+					  <div class="d-grid gap-2">
+					    <h5 class="card-title">Bolson #1</h5>
+					    <a href="#" class="btn btn-primary">Ver mas informacion</a>
+					    <div class="d-grid gap-2">
+					    	<a href="#" class="btn btn-success">Comprar</a>
+					   </div>
+                       </div>
+                       </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+              <div class="d-grid gap-2">
+                <h5 class="card-title">Bolson #1</h5>
+                <a href="#" class="btn btn-primary">Ver mas informacion</a>
+                <div class="d-grid gap-2">
+                    <a href="#" class="btn btn-success">Comprar</a>
+               </div>
+               </div>
+               </div>
+         </div>
+         <div class="col-md-4">
+            <div class="card">
+              <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+              <div class="d-grid gap-2">
+                <h5 class="card-title">Bolson #1</h5>
+                <a href="#" class="btn btn-primary">Ver mas informacion</a>
+                <div class="d-grid gap-2">
+                    <a href="#" class="btn btn-success">Comprar</a>
+               </div>
+               </div>
+               </div>
+         </div>
+         
+
+
+					
+
+    </div>
+
+      <div class="btn-toolbar d-flex justify-content-center " role="toolbar" aria-label="Toolbar with button groups" style= "width:100%">
+        <div class="btn-group me-4" role="group" aria-label="First group">
+          <button type="button" class="btn btn-primary" style="margin: 0 7px">1</button>
+          <button type="button" class="btn btn-primary" style="margin: 0 7px">2</button>
+          <button type="button" class="btn btn-primary" style="margin: 0 7px">3</button>
+          <button type="button" class="btn btn-primary"style="margin: 0 7px">4</button>
+          <button type="button" class="btn btn-primary"style="margin: 0 7px">5</button>
+          <button type="button" class="btn btn-primary" style="margin: 0 7px">6</button>
+          <button type="button" class="btn btn-primary" style="margin: 0 7px">...</button>
+        </div>
+      </div>
+        
+    
+    
+    
+      <div class="d-flex justify-content-around mt-4">
+        <div class="btn-group d-flex justify-content-center bg-primary mt-4" role="group" aria-label="Basic example">
+            <a href="{{url_for('main.register')}}" class="btn btn-primary">
+              Registrate
+              <!-- <button type="button" class="btn btn-primary">Registrate</button> -->
+      
+            </a>
+           
+            </div>
+            <a href="{{url_for('main.login')}}" class="btn btn-primary mt-4">
+                Iniciar sesion
+                <!-- <button type="button" class="btn btn-primary">¿Iniciar sesion</button> -->
+        
+              </a>
+    </div>
+</div>
+{% endblock %}   
+    
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/fe4eb8c452.js" crossorigin="anonymous"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

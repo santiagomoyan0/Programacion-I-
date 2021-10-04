@@ -1,12 +1,12 @@
 from flask import Blueprint, url_for, render_template, redirect
-from . import iniciar_sesion
+from . import inicio
 from main.forms import RegisterForm, LoginForm
 
 main = Blueprint('main', __name__, url_prefix= '/')
 
 @main.route('/')
 def vista():
-    return redirect(url_for('iniciar_sesion.index'))
+    return redirect(url_for('inicio.index'))
 
 @main.route('/register', methods=['POST', 'GET'])
 def register():
