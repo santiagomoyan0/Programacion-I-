@@ -2,6 +2,7 @@ from flask import Blueprint, url_for, render_template, redirect
 from . import inicio
 from main.forms import RegisterForm, LoginForm
 
+
 main = Blueprint('main', __name__, url_prefix= '/')
 
 @main.route('/')
