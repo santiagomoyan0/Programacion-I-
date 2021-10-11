@@ -1,7 +1,7 @@
-from flask import Blueprint, url_for, render_template, redirect
+from flask import Blueprint, url_for, render_template, redirect, current_app
 from . import inicio
 from main.forms import RegisterForm, LoginForm
-
+import requests, json 
 
 main = Blueprint('main', __name__, url_prefix= '/')
 
@@ -20,14 +20,18 @@ def register():
             'mail': form.email.data,
             'password': form.password.data
         }
+        print(user)
+        headers = {"content-type": "application/json"}
+
         r = requests.post(
-            f'{current_app.config["API_URL"]}/auth/register', json=user
-        )
-        if r.status_code == 201:
-            return redirect(url_for('main.login'))
+            f'{current_app.config["API_URL"]}/auth/register',
+            headers = headers,
+            json = user)
+        return redirect(url_for('main.login'))
+    return render_template('registrarse.html', form = form )
+       
 
-    return render_template('registrarse.html', title='Register', bg_color="bg-secondary", form = form)
-
+ 
 @main.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
