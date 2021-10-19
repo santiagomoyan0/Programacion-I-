@@ -2,7 +2,7 @@ from flask import Blueprint, url_for, render_template, redirect, current_app
 from . import inicio
 from main.forms import RegisterForm, LoginForm
 import requests, json 
-
+from auth import User
 main = Blueprint('main', __name__, url_prefix= '/')
 
 @main.route('/')
@@ -35,9 +35,32 @@ def register():
 @main.route('/login', methods=['POST', 'GET'])
 def login():
     form = LoginForm()
-    return render_template('iniciar_sesion.html', title='Login', bg_color="bg-secondary", form = form)
+    if form.validate_on_submit():
+        data = '{"email":"'+form.email.data+'", "password":"'+form.password.data+'"}'
+        r = requests.post(
+                current_app.config["API_URL"]+'/auth/login',
+                headers={"content-type": "application/json"},
+                data = data)
+        if r.status_code == 200:
+            user_data = json.loads(r.text)
+            user = User(id = user_data.get("id"), mail = user_data.get("mail"), rol= user_data.get("rol"))
+            login_user(user)
+            req = make_response(redirect(url_for('main.index')))
+            req.set_cookie('access_token', user_data.get("access_token"), httponly = True)
+            return req
+        else:
+            flash('Usuario o contraseña incorrecta', 'danger')
+    return redirect(url_for('main.index'))
+
+
+    
 
 @main.route('/logout')
 def logout():
-    return redirect(url_for('main.index'))
+    req = make_response(redirect(url_for('main.index')))
+    req.set_cookie('access_token', '', httponly = True)
+    logout_user()
+    return req
+
+    
     

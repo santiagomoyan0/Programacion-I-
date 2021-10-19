@@ -1,8 +1,8 @@
 from .. import login_manager
-from flask import request, flash, redirect, url_for,current_app
+from flask import request, flash, redirect, url_for
 from flask_login import UserMixin, LoginManager, current_user
 import jwt
-from functools import wraps
+import requests
 
 #Clase que contendrá los datos del usuario logueado
 class User(UserMixin):
@@ -47,3 +47,46 @@ def admin_required(fn):
             return redirect(url_for('main.index'))
         return fn(*args, **kws)
     return wrapper
+
+def proveedor_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "proveedor":
+            flash('Acceso restringido a proveedor.','warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+def cliente_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "cliente":
+            flash('Acceso restringido a cliente.','warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+def admin_provider_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "admin" and not current_user.role == "proveedor":
+            flash('Acceso restringido a administradores y proveedores', 'warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+def admin_client_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "admin" and not current_user.role == "cliente":
+            flash('Acceso restringido a administradores y clientes', 'warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+    def __call__(self, r):
+        r.headers["authorization"] = "Bearer " + self.token
+        return r 

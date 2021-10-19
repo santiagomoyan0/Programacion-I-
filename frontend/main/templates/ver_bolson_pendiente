@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,8 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-    <body class="bg-light">
+    <body class="bg-secondary">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a href="" class="navbar-brand">BolsonesTienda</a>
@@ -50,7 +48,7 @@
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="#">Administrador@mail.com</a>
+              <a class="nav-link" href="#">Usuario@mail.com</a>
             </li>
             <li class="nav-item">
           </ul>
@@ -58,24 +56,33 @@
       </div>
     </nav>
 
-<div class="container"></div>
-<div class="d-flex justify-content-center bg-primary">
-    <h3>Mis Productos</h3>
-</div>
-<ol class="list-group list-group-numbered">
-    <li class="list-group-item">Manzana</li>
-    <li class="list-group-item">Apio</li>
-    <li class="list-group-item">Tomate</li>
-    <li class="list-group-item">Lechuga</li>
-    <li class="list-group-item">Tomate</li>
-  </ol>
-  <div class="container d-flex justify-content-around mt-4">
-    <button type="button" class="btn btn-success btn-lg">Añadir Producto</button>
-    <button type="button" class="btn btn-warning btn-lg">Modificar Producto</button>
-    <button type="button" class="btn btn-primary btn-lg">Ver Producto</button>
-    <button type="button" class="btn btn-danger btn-lg">Eliminar Producto</button>
-  </div>
- <!-- Optional JavaScript; choose one of the two! -->
+    <div class="container">
+
+      <div class="d-flex justify-content-center bg-primary">
+        <h3>Ver Bolson Pendiente</h3>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+          <div class="d-grid gap-2">
+            <h5 class="card-title">Nombre</h5>
+            <h5 class="card-title">Estado</h5>
+            <h5 class="card-title">Fecha </h5>
+            <div class="d-grid gap-2">
+              <a href="#" class="btn btn-success">Aprobar</a>
+              <a href="#" class="btn btn-success">Rechazar</a>
+           </div>
+                     </div>
+                     </div>
+        </div>
+       
+
+      
+  
+
+    
+    <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>

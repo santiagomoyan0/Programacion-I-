@@ -23,6 +23,20 @@
         {{ show_error(field) }}
 
 {% endmacro %}
+{% macro MostrarCampo(Campo) %}
+{{Campo.label}}
+{{Campo(**kwargs)}}
+{{MostrarError(Campo)}}
+{% endmacro %}
+
+{% macro MostrarEnvio(Campo) %}
+{{Campo(**kwargs)}}
+{% endmacro %}
+
+{% macro MostrarError(Campo) %}
+{% if Campo.errors %}
+{% for error in Campo.errors %}
+{% endmacro %}
 
 {% macro show_submit(field) %}
 
