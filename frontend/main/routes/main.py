@@ -1,8 +1,10 @@
-from flask import Blueprint, url_for, render_template, redirect, current_app
+from flask import Blueprint, url_for, render_template, redirect, current_app, flash, make_response
 from . import inicio
 from main.forms import RegisterForm, LoginForm
 import requests, json 
-from auth import User
+from flask_login import login_user
+from .auth import User
+
 main = Blueprint('main', __name__, url_prefix= '/')
 
 @main.route('/')
@@ -43,14 +45,15 @@ def login():
                 data = data)
         if r.status_code == 200:
             user_data = json.loads(r.text)
+            print(user_data)
             user = User(id = user_data.get("id"), mail = user_data.get("mail"), rol= user_data.get("rol"))
             login_user(user)
-            req = make_response(redirect(url_for('main.index')))
+            req = make_response(redirect(url_for('main.vista')))
             req.set_cookie('access_token', user_data.get("access_token"), httponly = True)
             return req
         else:
             flash('Usuario o contraseña incorrecta', 'danger')
-    return redirect(url_for('main.index'))
+    return render_template('iniciar_sesion.html', form = form)
 
 
     

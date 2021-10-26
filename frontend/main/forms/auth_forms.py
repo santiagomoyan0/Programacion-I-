@@ -8,7 +8,7 @@ class LoginForm(FlaskForm):
 
     email = EmailField('E-mail',
     [
-        validators.Required(message = "E-mail is require"),
+        validators.Required(message = "E-mail is required"),
         validators.Email( message ='Formad not valid'),
     ],
     render_kw={"placeholder": "Email"}

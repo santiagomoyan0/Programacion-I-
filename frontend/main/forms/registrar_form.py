@@ -25,7 +25,7 @@ class RegisterForm(FlaskForm):
     )
 
     email = EmailField(
-        'Email',
+        'mail',
         [
             validators.Required(message = 'El email es requerido')
         ]

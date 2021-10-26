@@ -1,6 +1,4 @@
-Hola {{cliente.nombre}} {{cliente.apellido}}!
+Hola {{user.nombre}} {{user.apellido}}!
 Gracias por registrarte
 Estas son nuestras ofertas semanales por si quieres mirar:
-{% for bolson in bolsones %}
-    {{ bolson }}
-{% endfor %}
+

@@ -9,12 +9,10 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 #Método de logueo
 @auth.route('/login', methods=['POST'])
 def login():
-    #Busca al profesor en la db por mail
-    usuario = db.session.query(UsuarioModel).filter(UsuarioModel.mail == request.get_json().get("mail")).first_or_404()
+    
+    usuario = db.session.query(UsuarioModel).filter(UsuarioModel.mail == request.get_json().get("email")).first_or_404()
     #Valida la contraseña
     if usuario.validate_pass(request.get_json().get("password")):
-        #Genera un nuevo token
-        #Pasa el objeto professor como identidad
         access_token = create_access_token(identity=usuario)
         #Devolver valores y token
         data = {
@@ -38,7 +36,6 @@ def register():
         return 'Duplicated mail', 409
     else:
         try:
-            #Agregar professor a DB
             db.session.add(usuario)
             db.session.commit()
             sent = sendMail([usuario.mail],"Welcome!",'register',usuario = usuario)

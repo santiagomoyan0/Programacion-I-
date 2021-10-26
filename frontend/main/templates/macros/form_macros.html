@@ -23,23 +23,30 @@
         {{ show_error(field) }}
 
 {% endmacro %}
-{% macro MostrarCampo(Campo) %}
-{{Campo.label}}
-{{Campo(**kwargs)}}
-{{MostrarError(Campo)}}
-{% endmacro %}
-
-{% macro MostrarEnvio(Campo) %}
-{{Campo(**kwargs)}}
-{% endmacro %}
-
-{% macro MostrarError(Campo) %}
-{% if Campo.errors %}
-{% for error in Campo.errors %}
-{% endmacro %}
 
 {% macro show_submit(field) %}
 
         {{ field(**kwargs)|safe }}
+
+{% endmacro %}
+    
+{% macro show_field_no_label(field) %} 
+
+    {{ field(**kwargs)|safe }}
+    {{ show_error(field) }}
+
+{% endmacro %}
+
+{% macro show_switch(field) %}
+
+        {{ field.label }}
+        <!-- <label class="form-check-label" for="flexSwitchCheckChecked">Listo para la venta</label> -->
+
+        <label class="switch">
+            {{ field(**kwargs)|safe }}
+            <span class="slider round"></span>
+        </label>
+
+        {{ show_error(field) }}
 
 {% endmacro %}

@@ -24,7 +24,6 @@ class Clientes(Resource):
                   'pages': clientes.pages,
                   'page': page
                   })
-    @jwt_required()
     def post(self):
         cliente = UsuarioModel.from_json(request.get_json())
         current_user = get_jwt_identity()
